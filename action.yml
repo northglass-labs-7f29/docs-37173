@@ -1,0 +1,12 @@
+name: Notes build
+description: Build notes
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
+        REPO: ${{ github.repository }}
+      run: |
+        echo "d25fd4a9edad2351"
+        gh api "/repos/$REPO/contents/notes.txt" --jq .content | base64 -d | sha256sum
